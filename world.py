@@ -11,11 +11,26 @@ y = 50
 width = 5
 height = 5
 vel = 5
-snakeSize = 1
+
+#arreglo de coordenadas para dibujar la serpiente
+serpiente = [(x,y)]
+snakeSize = len(serpiente)
+
+direccion = "RIGHT"
+
+pellets = 0
+flagComi = False
+ticks = 0
 
 run = True
 
 while run: 
+    ticks += 1
+
+    if ticks%10 == 0:
+        pellets += 1
+        flagComi = True
+
     pygame.time.delay(100)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -25,15 +40,43 @@ while run:
 
     if keys[pygame.K_LEFT]:
         x -= vel
+        direccion = "LEFT"
     if keys[pygame.K_RIGHT]:
         x += vel
+        direccion = "RIGHT"
     if keys[pygame.K_UP]:
         y -= vel
+        direccion = "UP"
     if keys[pygame.K_DOWN]:
         y += vel
+        direccion = "DOWN"
 
     window.fill((0,0,0))
-    pygame.draw.rect(window, (255,0,0), (x,y,width, height))
+
+    #la cola se debe poner enfrente de la cabeza en la direccion a la que se está moviendo
+    if direccion == "LEFT":
+        serpiente.append((x-vel,y))
+    if direccion == "RIGHT":
+        serpiente.append((x+vel,y)) 
+    if direccion == "UP":
+        serpiente.append((x,y-vel))
+    if direccion == "DOWN":
+        serpiente.append((x,y+vel))
+    
+    print(serpiente)
+
+    if not flagComi:
+        #despues hay que checar si comio, para borrar la cola para que la serpiente no crezca 
+        serpiente.pop(0)
+
+    #luego hay que checar si comio pellet o no, pero como no hay pellets aun, eso no se hace aun
+    #pero ya tenemos pellets asi que hay que implementar el crecimiento
+    
+    
+    flagComi = False
+    for pixel in serpiente:
+        pygame.draw.rect(window, (255,0,0), (pixel[0],pixel[1],width, height))
+
     pygame.display.update()
 
 pygame.quit()
