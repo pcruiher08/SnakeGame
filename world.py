@@ -24,6 +24,35 @@ ticks = 0
 
 run = True
 
+def gameOver():
+    #mostrar score en grande
+    print("perdiste")
+    run = False
+    return
+
+def checarColisiones():
+    #hay que checar si chocamos con paredes
+    #hay que checar si chocamos con nosotros
+    #hay que checar si chocamos con pellets
+
+    if(x<=0 or x>=500 or y<=0 or y>=500):
+        #chocamos con pared
+        gameOver()
+    
+    choqueConmigo = False
+
+    for pixel in serpiente:
+        if serpiente.count(pixel)>1:
+            choqueConmigo = True
+            break
+
+    if choqueConmigo:
+        gameOver()
+
+    if serpiente[snakeSize - 1] == pellet:
+        flagComi = True
+    
+
 def checarTeclado():
     global x
     global y
@@ -97,6 +126,7 @@ def main():
                 run = False
 
         checarTeclado()
+        checarColisiones()
         actualizarSerpiente()
         dibujarElementos()
 
