@@ -24,18 +24,11 @@ ticks = 0
 
 run = True
 
-while run: 
-    ticks += 1
+def checarTeclado():
+    global x
+    global y
+    global direccion
 
-    if ticks%10 == 0:
-        pellets += 1
-        flagComi = True
-
-    pygame.time.delay(100)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_LEFT]:
@@ -51,8 +44,9 @@ while run:
         y += vel
         direccion = "DOWN"
 
-    window.fill((0,0,0))
-
+def actualizarSerpiente():
+    global direccion
+    global serpiente
     #la cola se debe poner enfrente de la cabeza en la direccion a la que se está moviendo
     if direccion == "LEFT":
         serpiente.append((x-vel,y))
@@ -71,12 +65,43 @@ while run:
 
     #luego hay que checar si comio pellet o no, pero como no hay pellets aun, eso no se hace aun
     #pero ya tenemos pellets asi que hay que implementar el crecimiento
-    
-    
-    flagComi = False
+
+def dibujarElementos():
+    global window
+    global serpiente
+    window.fill((0,0,0))
+
     for pixel in serpiente:
         pygame.draw.rect(window, (255,0,0), (pixel[0],pixel[1],width, height))
 
     pygame.display.update()
 
-pygame.quit()
+
+def main():
+    global ticks
+    global run
+    global pellets
+    global flagComi
+    global serpiente
+
+    while run: 
+        ticks += 1
+
+        if ticks%10 == 0:
+            pellets += 1
+            flagComi = True
+
+        pygame.time.delay(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+
+        checarTeclado()
+        actualizarSerpiente()
+        dibujarElementos()
+
+        flagComi = False
+
+    pygame.quit()
+
+main()
