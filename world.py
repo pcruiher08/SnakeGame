@@ -66,6 +66,7 @@ def checarColisiones():
 
     if(x<=0 or x>=500 or y<=0 or y>=500):
         #chocamos con pared
+        print("me sali de la pantalla")
         gameOver()
     
     choqueConmigo = False
@@ -76,10 +77,12 @@ def checarColisiones():
             break
 
     if choqueConmigo:
+        print("choque conmigo")
         gameOver()
 
     if serpiente[snakeSize - 1] == pellet:
         flagComi = True
+        print("munch munch")
     
 
 def checarTeclado():
