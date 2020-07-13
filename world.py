@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -16,6 +17,8 @@ vel = 5
 serpiente = [(x,y)]
 snakeSize = len(serpiente)
 
+pellet = (0,0)
+
 direccion = "RIGHT"
 
 pellets = 0
@@ -23,6 +26,28 @@ flagComi = False
 ticks = 0
 
 run = True
+
+def generarCoordenadaRandom():
+    newX = random.randint(0, 100) * 5
+    newY = random.randint(0, 100) * 5
+    return (newX, newY)
+
+def spawnPellet():
+    global pellet
+    newPellet = generarCoordenadaRandom()
+    valida = True
+
+    while not valida:
+        valida = True
+        for point in serpiente:
+            if point[0] == newPellet[0] and point[1] == newPellet[1]:
+                valida = False
+                break
+
+        if not valida:
+            newPellet = generarCoordenadaRandom()
+    
+    pellet = newPellet
 
 def checarTeclado():
     global x
@@ -71,8 +96,12 @@ def dibujarElementos():
     global serpiente
     window.fill((0,0,0))
 
+    # Dibujar serpiente
     for pixel in serpiente:
         pygame.draw.rect(window, (255,0,0), (pixel[0],pixel[1],width, height))
+
+    # Dibujar pellet
+    pygame.draw.rect(window, (0, 255, 0), (pellet[0], pellet[1],width, height))
 
     pygame.display.update()
 
@@ -83,6 +112,8 @@ def main():
     global pellets
     global flagComi
     global serpiente
+
+    spawnPellet()
 
     while run: 
         ticks += 1
