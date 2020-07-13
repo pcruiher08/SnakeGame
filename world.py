@@ -68,6 +68,7 @@ def checarColisiones():
         #chocamos con pared
         print("me sali de la pantalla")
         gameOver()
+        return
     
     choqueConmigo = False
 
@@ -79,16 +80,19 @@ def checarColisiones():
     if choqueConmigo:
         print("choque conmigo")
         gameOver()
+        return
 
     if serpiente[snakeSize - 1] == pellet:
         flagComi = True
         print("munch munch")
+        spawnPellet()
     
 
 def checarTeclado():
     global x
     global y
     global direccion
+    global vel 
 
     keys = pygame.key.get_pressed()
 
@@ -109,16 +113,18 @@ def actualizarSerpiente():
     global direccion
     global serpiente
     #la cola se debe poner enfrente de la cabeza en la direccion a la que se está moviendo
+    print("serpiente Antes: ", serpiente)
+    print(direccion)
     if direccion == "LEFT":
-        serpiente.append((x-vel,y))
+        serpiente.append((serpiente[snakeSize-1][0]-vel,serpiente[snakeSize-1][1]))
     if direccion == "RIGHT":
-        serpiente.append((x+vel,y)) 
+        serpiente.append((serpiente[snakeSize-1][0]+vel,serpiente[snakeSize-1][1])) 
     if direccion == "UP":
-        serpiente.append((x,y-vel))
+        serpiente.append((serpiente[snakeSize-1][0],serpiente[snakeSize-1][1]-vel))
     if direccion == "DOWN":
-        serpiente.append((x,y+vel))
+        serpiente.append((serpiente[snakeSize-1][0],serpiente[snakeSize-1][1]+vel))
+    print("serpiente Despues: ", serpiente)
     
-    print(serpiente)
 
     if not flagComi:
         #despues hay que checar si comio, para borrar la cola para que la serpiente no crezca 
@@ -152,11 +158,14 @@ def main():
     spawnPellet()
 
     while run: 
-        ticks += 1
+        print(serpiente)
 
+        ticks += 1
+        '''
         if ticks%10 == 0:
             pellets += 1
             flagComi = True
+        '''
 
         pygame.time.delay(100)
         for event in pygame.event.get():
