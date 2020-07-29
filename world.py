@@ -9,10 +9,11 @@ pygame.display.set_caption("SnakeGame")
 
 x = 50
 y = 50
-width = 5
-height = 5
-vel = 5
+width = 10
+height = 10
+vel = 10
 
+black = (0,0,0)
 #arreglo de coordenadas para dibujar la serpiente
 serpiente = [(x,y)]
 snakeSize = len(serpiente)
@@ -27,10 +28,22 @@ ticks = 0
 
 run = True
 
+def drawMatrix():
+    for i in range(50):
+        pygame.draw.line(window, (255,255,255), (0, i * 10), (500, i * 10), 1)
+        pygame.draw.line(window, (255,255,255), (i * 10, 0), (i * 10, 500), 1)
+
+
 def generarCoordenadaRandom():
-    newX = random.randint(0, 100) * 5
-    newY = random.randint(0, 100) * 5
+    newX = random.randint(0, 50) * 10
+    newY = random.randint(0, 50) * 10
     return (newX, newY)
+
+def showScore(text):
+    largeText = pygame.font.Font('freesansbold.ttf',50)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((500/2),(500/2))
+    window.blit(TextSurf, TextRect)
 
 def spawnPellet():
     global pellet
@@ -64,8 +77,12 @@ def checarColisiones():
     #hay que checar si chocamos con nosotros
     #hay que checar si chocamos con pellets
 
-    if(x<=0 or x>=500 or y<=0 or y>=500):
+    #serpiente[0][0] es x
+    #serpiente[0][1] es y
+
+    if(serpiente[0][0]<0 or serpiente[0][0]>500 or serpiente[0][1]<0 or serpiente[0][1]>500):
         #chocamos con pared
+        
         print("me sali de la pantalla")
         gameOver()
         return
@@ -112,6 +129,7 @@ def checarTeclado():
 def actualizarSerpiente():
     global direccion
     global serpiente
+    global flagComi
     #la cola se debe poner enfrente de la cabeza en la direccion a la que se está moviendo
     print("serpiente Antes: ", serpiente)
     print(direccion)
@@ -123,20 +141,23 @@ def actualizarSerpiente():
         serpiente.append((serpiente[snakeSize-1][0],serpiente[snakeSize-1][1]-vel))
     if direccion == "DOWN":
         serpiente.append((serpiente[snakeSize-1][0],serpiente[snakeSize-1][1]+vel))
-    print("serpiente Despues: ", serpiente)
     
 
     if not flagComi:
         #despues hay que checar si comio, para borrar la cola para que la serpiente no crezca 
         serpiente.pop(0)
-
-    #luego hay que checar si comio pellet o no, pero como no hay pellets aun, eso no se hace aun
-    #pero ya tenemos pellets asi que hay que implementar el crecimiento
+    print("serpiente Despues: ", serpiente)
+    
+    
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
 
 def dibujarElementos():
     global window
     global serpiente
-    window.fill((0,0,0))
+    drawMatrix()
+    window.fill((128,128,128))
 
     # Dibujar serpiente
     for pixel in serpiente:
@@ -144,7 +165,8 @@ def dibujarElementos():
 
     # Dibujar pellet
     pygame.draw.rect(window, (0, 255, 0), (pellet[0], pellet[1],width, height))
-
+    drawMatrix()
+    showScore(str(serpiente[0]))
     pygame.display.update()
 
 
