@@ -10,7 +10,7 @@ cabezaY = 50
 anchoDePixel = 10
 altoDePixel = 10
 vel = 10
-
+score = 0
 foodX = 200
 foodY = 200
 
@@ -38,9 +38,10 @@ def moverSerpiente(direccion, serpiente):
 def spawnFood():
     global foodX
     global foodY
+    global score
     foodX = random.randint(1, 49) * 10
     foodY = random.randint(1, 49) * 10
-    print((foodX,foodY))
+    
 
 def draw(win, serpiente):
     global anchoDePixel
@@ -49,6 +50,10 @@ def draw(win, serpiente):
     global foodY
 
     win.fill((0,0,0))
+
+    font = pygame.font.SysFont('Comic Sans MS', 25)
+    text_surface = font.render("Score: "+ str(score), False, (255,255,255))
+    win.blit(text_surface, dest = (0,0))
 
     #draw food
     pygame.draw.rect(win, (0,255,255), (foodX,foodY,anchoDePixel,altoDePixel))
@@ -67,6 +72,8 @@ def gameOver():
     return
 
 def serpienteCome(serpiente):
+    global score
+    score += 100
     spawnFood()
     serpiente.append(serpiente[len(serpiente) - 1]) 
 
