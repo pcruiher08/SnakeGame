@@ -29,6 +29,9 @@ def moverSerpiente(direccion, serpiente):
         nuevaCabezaX += vel
     elif direccion == "IZQUIERDA":
         nuevaCabezaX -= vel
+    
+    #nuevaCabezaX%=500
+    #nuevaCabezaY%=500
     serpiente.insert(0, (nuevaCabezaX,nuevaCabezaY))
 
 def spawnFood():
@@ -80,7 +83,7 @@ def serpienteCome(serpiente):
     global score
     score += 100
     spawnFood()
-    for i in range(100):
+    for i in range(15):
         serpiente.append(serpiente[len(serpiente) - 1]) 
 
 def revisaColisiones(serpiente):
