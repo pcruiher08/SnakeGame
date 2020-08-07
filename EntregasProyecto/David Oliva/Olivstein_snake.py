@@ -5,19 +5,19 @@ pantalla = 500
 activo = True #juego
 echele = True #pause
 actividad =  True #main
-file = r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\cancion.mp3"
+file = "cancion.mp3"
 pygame.mixer.init()
 pygame.mixer.music.load(file)
 pygame.mixer.music.play(-1)
 
 def main(activo,pantalla,echele,actividad):
 
-    menu = pygame.image.load(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\menu.jpg")
+    menu = pygame.image.load("menu.jpg")
     menu = pygame.transform.scale(menu, (500,500))
     pygame.init()
     screen = pygame.display.set_mode((pantalla,pantalla))
     pygame.display.set_caption("Snake")
-    inst = pygame.freetype.Font(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\PlayMeGames-Demo.otf ", 20)
+    inst = pygame.freetype.Font("PlayMeGames-Demo.otf ", 20)
     text_surface, rect = inst.render("Presiona P para pausar el juego", (0, 0, 0))
 
 
@@ -43,8 +43,8 @@ def paus(screen):
     paused = True
 
     while paused:
-        GAME_FONT = pygame.freetype.Font(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\PlayMeGames-Demo.otf ", 40)
-        GAME_FONT1 = pygame.freetype.Font(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\PlayMeGames-Demo.otf ", 25)
+        GAME_FONT = pygame.freetype.Font("PlayMeGames-Demo.otf ", 40)
+        GAME_FONT1 = pygame.freetype.Font("PlayMeGames-Demo.otf ", 25)
         text_surface, rect = GAME_FONT.render("P A U S A", (0, 0, 0))
         text_surface1, rect = GAME_FONT1.render("Presiona C para continuar", (0, 0, 0))
         screen.blit(text_surface, (140, 140))
@@ -62,8 +62,8 @@ def gameover(screen):
 
     over = True
     while over:
-        GAME_FONT = pygame.freetype.Font(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\PlayMeGames-Demo.otf ", 30)
-        GAME_FONT1 = pygame.freetype.Font(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\PlayMeGames-Demo.otf ", 25)
+        GAME_FONT = pygame.freetype.Font("PlayMeGames-Demo.otf ", 30)
+        GAME_FONT1 = pygame.freetype.Font("PlayMeGames-Demo.otf ", 25)
         text_surface, rect = GAME_FONT.render("G A M E O V E R", (255, 0, 0))
         text_surface1, rect = GAME_FONT1.render("Presiona ESPACIO para salir", (255, 0, 0))
         screen.blit(text_surface, (120, 140))
@@ -96,8 +96,8 @@ def juego(activo,pantalla,screen, echele, actividad):
 
     screen = pygame.display.set_mode((pantalla,pantalla))
     pygame.display.set_caption("Snake")
-    img = pygame.image.load(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\tierra.png")
-    comida = pygame.image.load(r"C:\Users\damol\OneDrive\Imágenes\Escritorio\Verano2020\Progra\Prgrma_Hub\Desarrollo de juego\manzana.jpg.png")
+    img = pygame.image.load("tierra.png")
+    comida = pygame.image.load("manzana.jpg.png")
     comida = pygame.transform.scale(comida, (30,30))
     letra = pygame.font.Font('freesansbold.ttf', 32)
     texto = letra.render("Puntuación : " + str(marcador), True ,(0,0,0), (255,0,0))
@@ -199,3 +199,13 @@ def movim(snake, desplaz,indi):
 
     
 main(activo,pantalla,echele,actividad)
+
+   
+
+
+
+
+
+
+
+
