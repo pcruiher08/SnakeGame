@@ -15,6 +15,7 @@ foodX = 200
 foodY = 200
 direccion = "DERECHA"
 serpiente = [(cabezaX,cabezaY)]
+pausa = False
 
 def moverSerpiente(direccion, serpiente):
     global vel
@@ -83,7 +84,11 @@ def serpienteCome(serpiente):
     global score
     score += 100
     spawnFood()
+<<<<<<< HEAD
+    for i in range(5):
+=======
     for i in range(15):
+>>>>>>> 4da871555f3fe40cf0dcee11d0b8d9746c6c892e
         serpiente.append(serpiente[len(serpiente) - 1]) 
 
 def revisaColisiones(serpiente):
@@ -112,6 +117,8 @@ def main():
     global serpiente
     global vel
     global direccion
+    global pausa
+
     pygame.init()
     win = pygame.display.set_mode((SCREENSIZE,SCREENSIZE))
     pygame.display.set_caption("SnakeGame")
@@ -122,6 +129,13 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_p]:
+            pausa = not pausa
+
+        if pausa:
+            continue
+
         if keys[pygame.K_RIGHT]:
             direccion = "DERECHA"
             cabezaX += vel
