@@ -35,3 +35,6 @@ Juego minimo, funcionando muy bien.
 Luis Careña: 
 Todo funciona muy bien, incluyendo las funcionalidades adicionales.
 
+David Oliva: no corre 
+
+Javier Solis: Todo funciona, pausa como elemento extra.
