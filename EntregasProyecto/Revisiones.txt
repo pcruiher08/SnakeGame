@@ -1,0 +1,37 @@
+Mariano Hernandez: 
+Todas las colisiones funcionan apropiadamente, 
+ serpiente crece y come la comida, la comida cambia de lugar, 
+ el unico detalle es que a la hora de crecer, 
+ la cola de la serpiente aparece siempre primero en un lugar abajo a la izquierda de la ventana.
+
+ 
+Ibrahim Esparza:
+Proyecto perfecto con todas las funcionalidades incluyendo las extras, agregó música.
+
+Jose Pablo Vázquez:
+Proyecto minimo, todas las colisiones funcionan, la serpiente come y crece.
+
+Ivan Moreno:
+Se incluyeron todas las funcionalidades, también las adicionales y todas funcionan apropiadamente.
+
+Pedro Daniel Alcázar Ortega: 
+Se incluyeron todas las funcionaes extras, todo funciona. Se incluyó un botón para reiniciar y funciona muy bien. 
+
+Daniel Zapata: 
+Se incluyeron todas las funcionalidades extras, se incluyó una interfáce gráfica con botones, todo funciona muy bien.
+
+Jorge Abraham Jimenez: 
+Juego perfecto, incluyó todo lo adicional y le puso música a todo
+
+Mario Jauregui:
+implementó todo y varios modos de juego con botones. 
+
+Raquel Zuñiga:
+Implementó todo menos la pausa. Todo excelente.
+
+Alvaro Gongora:
+Juego minimo, funcionando muy bien.
+
+Luis Careña: 
+Todo funciona muy bien, incluyendo las funcionalidades adicionales.
+
